@@ -1,22 +1,22 @@
 import java.util.Arrays;
 
 public class MergeSort {
-    public static void sort(int [] arr, int i, int k) {
+    public static void sort(int [] numbers, int i, int k) {
         int j;
 
         if (i < k) {
             j = (i + k) / 2;  // Find the midpoint in the partition
 
             // Recursively sort left and right partitions
-            sort(arr, i, j);
-            sort(arr, j + 1, k);
+            sort(numbers, i, j);
+            sort(numbers, j + 1, k);
 
             // Merge left and right partition in sorted order
-            merge(arr, i, j, k);
+            merge(numbers, i, j, k);
         }
     }
 
-    public static void merge(int [] arr, int i, int j, int k) {
+    public static void merge(int [] numbers, int i, int j, int k) {
         int mergedSize = k - i + 1;       // Size of merged partition
         int[] mergedNumbers = new int[mergedSize]; // Temporary array for merged numbers
         int mergePos;                     // Position to insert merged number
@@ -29,12 +29,12 @@ public class MergeSort {
 
         // Add smallest element from left or right partition to merged numbers
         while (leftPos <= j && rightPos <= k) {
-            if (arr[leftPos] < arr[rightPos]) {
-                mergedNumbers[mergePos] = arr[leftPos];
+            if (numbers[leftPos] < numbers[rightPos]) {
+                mergedNumbers[mergePos] = numbers[leftPos];
                 ++leftPos;
             }
             else {
-                mergedNumbers[mergePos] = arr[rightPos];
+                mergedNumbers[mergePos] = numbers[rightPos];
                 ++rightPos;
             }
             ++mergePos;
@@ -42,21 +42,21 @@ public class MergeSort {
 
         // If left partition is not empty, add remaining elements to merged numbers
         while (leftPos <= j) {
-            mergedNumbers[mergePos] = arr[leftPos];
+            mergedNumbers[mergePos] = numbers[leftPos];
             ++leftPos;
             ++mergePos;
         }
 
         // If right partition is not empty, add remaining elements to merged numbers
         while (rightPos <= k) {
-            mergedNumbers[mergePos] = arr[rightPos];
+            mergedNumbers[mergePos] = numbers[rightPos];
             ++rightPos;
             ++mergePos;
         }
 
         // Copy merge number back to numbers
         for (mergePos = 0; mergePos < mergedSize; ++mergePos) {
-            arr[i + mergePos] = mergedNumbers[mergePos];
+            numbers[i + mergePos] = mergedNumbers[mergePos];
         }
     }
 
